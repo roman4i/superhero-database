@@ -1,7 +1,10 @@
+import Title from '../Title/Title';
+import './app.css';
+
 function App() {
   return (
-    <div>
-      Basic React App
+    <div className='appBox'>
+      <Title />
     </div>
   );
 }
