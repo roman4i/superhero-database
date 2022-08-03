@@ -1,5 +1,6 @@
 import Title from '../Title/Title';
 import Divider from '../Divider/Divider';
+import PageNav from '../PageNav/PageNav';
 import './app.css';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className='appBox'>
       <Title />
       <Divider />
+      <PageNav />
     </div>
   );
 }
