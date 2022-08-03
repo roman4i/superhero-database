@@ -1,3 +1,14 @@
 .navButton {
     height: 30px;
 }
+
+.plusHero {
+    width: 150px;
+    margin: 15px;
+    text-align: center;
+    padding: 1px;
+}
+
+.plusHeroImg {
+    width: 80px;
+}
