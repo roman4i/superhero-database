@@ -1,0 +1,11 @@
+.heroCardBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.heroCardBox a {
+    text-decoration: none;
+    color: black;
+}
