@@ -4,6 +4,7 @@ import Title from '../Title/Title';
 import Divider from '../Divider/Divider';
 import PageNav from '../PageNav/PageNav';
 import HeroCardBox from '../HeroCardBox/HeroCardBox';
+import HeroPage from '../HeroPage/HeroPage';
 import './app.css';
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
               </>
             }
           />
-          <Route path='new-hero' element={<div>New user</div>} />
-          <Route path='show-hero' element={<div>Random hero</div>} />
+          <Route path='/new-hero' element={<div>New user</div>} />
+          <Route path='/show-hero' element={<div>Please, choose right hero</div>} />
+          <Route path='/show-hero/:heroId' element={<HeroPage />} />
           <Route path='*' element={<div>Not found</div>} />
         </Routes>
       </BrowserRouter>

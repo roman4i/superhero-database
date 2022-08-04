@@ -1,0 +1,11 @@
+.heroPageBox {
+    padding: 13px;
+}
+
+.heroPageBox table {
+    width: 100%;
+}
+
+.heroRowName {
+    width: 25%;
+}

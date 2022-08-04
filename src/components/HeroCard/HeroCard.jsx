@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './hero-card.css';
 import noImage from '../../images/no-image.png';
 
-const HeroCard = () => {
+const HeroCard = ({ id }) => {
   return(
-    <Link to='/show-hero' >
+    <Link to={'/show-hero/' + id} >
       <div className='heroCard'>
         <img className='heroImage' src={ noImage } alt="hero" />
         <div>
