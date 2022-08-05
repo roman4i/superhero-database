@@ -2,7 +2,7 @@ const db = require('../config/dbConfig');
 
 const deleteHeroController = async (req, res) => {
   try {
-    const result = await db.heroesCollection.deleteOne({name: req.params.name});
+    const result = await db.heroesCollection.deleteOne({real_name: req.params.real_name});
     if(result.deletedCount === 1) {
       res.status(200);
     } else {

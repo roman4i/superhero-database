@@ -5,7 +5,7 @@ const routes = require('./routes/routes');
 const app = express();
 
 app.use(express.static(paths.build));
-app.use(express.json())
+app.use(express.json());
 
 app.get('/', routes.home);
 app.get('/getHeroesData', routes.getHeroesData);

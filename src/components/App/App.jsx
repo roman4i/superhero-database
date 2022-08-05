@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Title from '../Title/Title';
 import Divider from '../Divider/Divider';
@@ -9,6 +9,17 @@ import NewHeroPage from '../NewHeroPage/NewHeroPage';
 import './app.css';
 
 function App() {
+  const [heroesData, setHeroesData] = useState([]);
+
+  useEffect(() => {
+    fetch('/getHeroesData')
+      .then(res => res.json())
+      .then(result => {
+        setHeroesData(result);
+      })
+      .catch(err => setHeroesData([]))
+  }, []);
+
   return (
     <div className='appBox'>
       <BrowserRouter>
@@ -20,7 +31,7 @@ function App() {
             element={
               <>
                 <PageNav />
-                <HeroCardBox />
+                <HeroCardBox heroesData={heroesData} />
               </>
             }
           />

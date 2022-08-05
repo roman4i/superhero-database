@@ -3,14 +3,14 @@ import HeroCard from '../HeroCard/HeroCard';
 import PlusHero from '../buttons/PlusHero';
 import './hero-card-box.css'
 
-const HeroCardBox = () => {
+const HeroCardBox = ({ heroesData }) => {
+	const heroesCards = heroesData.map(val => {
+		return <HeroCard id={val._id} />
+	})
+
 	return(
 		<div className='heroCardBox' >
-			<HeroCard id='0' />
-			<HeroCard id='1' />
-			<HeroCard id='2' />
-			<HeroCard id='3' />
-			<HeroCard id='4' />
+			{ heroesCards }
 			<PlusHero />
 		</div>
 	);
