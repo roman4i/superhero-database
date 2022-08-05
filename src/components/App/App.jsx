@@ -10,15 +10,19 @@ import './app.css';
 
 function App() {
   const [heroesData, setHeroesData] = useState([]);
+  const [getHeroes, setGetHeroes] = useState(true);
 
   useEffect(() => {
-    fetch('/getHeroesData')
+    if(getHeroes) {
+      fetch('/getHeroesData')
       .then(res => res.json())
       .then(result => {
         setHeroesData(result);
       })
       .catch(err => setHeroesData([]))
-  }, []);
+      setGetHeroes(false);
+    }
+  }, [getHeroes]);
 
   return (
     <div className='appBox'>
@@ -35,7 +39,7 @@ function App() {
               </>
             }
           />
-          <Route path='/new-hero' element={<NewHeroPage />} />
+          <Route path='/new-hero' element={<NewHeroPage updateHeroes={setGetHeroes} />} />
           <Route path='/show-hero' element={<div>Please, choose right hero</div>} />
           <Route path='/show-hero/:heroId' element={<HeroPage />} />
           <Route path='*' element={<div>Not found</div>} />

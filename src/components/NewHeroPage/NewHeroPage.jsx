@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './new-hero-page-style.css';
 
 const basicModel = {
@@ -10,9 +11,10 @@ const basicModel = {
   images: [],
 }
 
-const NewHeroPage = () => {
+const NewHeroPage = ({ updateHeroes }) => {
   const [newHeroData, setNewHeroData] = useState({...basicModel});
   const [errorText, setErrorText] = useState('');
+  const navigate = useNavigate();
 
   const setNewValue = (valName, val) => {
     setNewHeroData(old => {
@@ -90,9 +92,13 @@ const NewHeroPage = () => {
         body: JSON.stringify({...newHeroData})
       })
       .then(resp => {
-        resp.status > 199 && resp.status < 300 
-        ? setErrorText('Soccefully sended new data')
-        : setErrorText('Failed to send data');
+        if(resp.status > 199 && resp.status < 300) {
+          setErrorText('Soccefully sended new data');
+          updateHeroes(true);
+          navigate('/');
+        } else {
+          setErrorText('Failed to send data')
+        }
       })
       .catch(err => setErrorText(err.message));
     }
@@ -103,7 +109,7 @@ const NewHeroPage = () => {
       <table>
         <tbody>
           <tr>
-            <td className='heroRowName'>Nickname</td>
+            <td className='heroRowName'>Real name</td>
             <td>
               <input 
                 type="text" 
@@ -114,7 +120,7 @@ const NewHeroPage = () => {
             </td>
           </tr>
           <tr>
-            <td className='heroRowName'>Real name</td>
+            <td className='heroRowName'>Nickname</td>
             <td>
               <input 
                 type="text" 
