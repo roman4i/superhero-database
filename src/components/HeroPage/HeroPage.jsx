@@ -19,6 +19,7 @@ const HeroPage = () => {
   const [errorState, setErrorState] = useState(' ');
   const [edit, setEdit] = useState(defaultEdit);
   const [disableSave, setDisableSave] = useState(true);
+  const [sendFiles, setSendFiles] = useState(null);
   let currHero = {};
 
   contextData.heroesData.heroesData.forEach(element => {
@@ -87,6 +88,7 @@ const HeroPage = () => {
   const resetData = () => {
     setDisableSave(true);
     setChangedData(currHero);
+    setSendFiles(null);
   }
 
   const onSave = () => {
@@ -108,6 +110,35 @@ const HeroPage = () => {
       }
     })
     .catch(err => setErrorState(err.message));
+
+    if(sendFiles !== null) {
+      fetch('http://localhost:3001/uploadImage', {
+        method: 'POST',
+        body: sendFiles,
+      })
+      .catch(err => console.log(err.message))
+    }
+  }
+
+  const onLoadImgs = (e) => {
+    setDisableSave(false);
+
+    let links = [];
+
+    const filesList = new FormData();
+
+    for(let i = 0; i < e.target.files.length; i++) {
+      links.push(e.target.files[i].name);
+      filesList.append('file' + i, e.target.files[i], e.target.files[i].name)
+    }
+
+    setChangedData(old => {
+      return{
+        ...old,
+        images: old.images.concat(links),
+      }
+    })
+    setSendFiles(filesList);
   }
 
     return(
@@ -192,7 +223,15 @@ const HeroPage = () => {
             </tr>
             <tr>
               <td className='heroRowName' >Images</td>
-              <td>Images</td>
+              <td>
+              <input 
+                type="file" 
+                name="file_button" 
+                multiple={true}
+                accept='image/*'
+                onChange={onLoadImgs}
+              />
+              </td>
             </tr>
           </tbody>
         </table>

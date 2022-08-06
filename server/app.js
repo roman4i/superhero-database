@@ -7,6 +7,7 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
 app.use(express.static(paths.build));
+app.use(express.static(paths.images));
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload({
