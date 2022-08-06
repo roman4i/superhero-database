@@ -12,3 +12,8 @@
   margin-top: 8px;
   padding: 20px 60px;
 }
+
+.newHeroError {
+  text-align: center;
+  color: red;
+}

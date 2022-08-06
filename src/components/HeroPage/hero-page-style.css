@@ -9,3 +9,14 @@
 .heroRowName {
     width: 25%;
 }
+
+.heroPageButtons {
+    display: flex;
+    justify-content: space-around;
+    margin: 8px;
+}
+
+.editBtnTd {
+    text-align: center;
+    width: 15%;
+}

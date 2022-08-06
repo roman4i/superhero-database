@@ -1,0 +1,25 @@
+.imagesContainer {
+  display: flex;
+  overflow-x: auto;
+  height: 200px;
+  margin-top: 20px;
+  padding: 20px;
+  align-items: center;
+}
+
+.imagesContainer div {
+  position: relative;
+}
+
+.imageFromList {
+  height: 150px;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.deleteImgBtn {
+  height: 40px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
