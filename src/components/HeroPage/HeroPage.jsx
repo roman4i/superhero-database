@@ -1,8 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import Context from '../../storage/context';
 import inputSwitch from '../../utils/inputSwitch';
+import ImagesList from '../ImagesList/ImagesList';
 import './hero-page-style.css';
+
+// Attention! Next can be so musch of non optimized code
 
 const defaultEdit = {
   nickname: false,
@@ -29,7 +32,6 @@ const HeroPage = () => {
   });
 
   const [changedData, setChangedData] = useState(currHero)
-
 
   const deleteHero = () => {
     setErrorState('Trying to delete this hero ...');
@@ -241,6 +243,7 @@ const HeroPage = () => {
           <input type="button" value="Save changes" disabled={disableSave} onClick={onSave} />
           <input type="button" value="Reset changes" onClick={resetData} />
         </div>
+        <ImagesList imgs={changedData.images} setChangedData={setChangedData} disSave={setDisableSave} />
       </div>
     );
 }

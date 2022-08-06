@@ -1,13 +1,13 @@
 import './images-list-style.css';
 import ImagesListImage from './ImagesListImage';
 
-const ImagesList = ({ imgs }) => {
+const ImagesList = ({ imgs, setChangedData, disSave }) => {
   const ImagesCollection = imgs.map((val, ind) => {
-    <ImagesListImage src={val} key={ind} />
+    return <ImagesListImage src={val} key={ind} changeImages={setChangedData} disSave={disSave} />
   });
 
   return(
-    <div>
+    <div className='imagesContainer'>
       { ImagesCollection }
     </div>
   );
