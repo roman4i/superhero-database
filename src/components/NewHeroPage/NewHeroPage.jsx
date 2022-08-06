@@ -84,7 +84,7 @@ const NewHeroPage = ({ updateHeroes }) => {
 
     if(!generateError) {
       setErrorText('Sending data ...');
-      fetch('/newHero', {
+      fetch('http://localhost:3001/newHero', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

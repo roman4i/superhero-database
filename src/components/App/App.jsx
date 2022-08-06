@@ -9,23 +9,41 @@ import NewHeroPage from '../NewHeroPage/NewHeroPage';
 import Context from '../../storage/context';
 import './app.css';
 
+const basicPagePosition = {
+  current: 0,
+  max: 0,
+}
+
 function App() {
   const [heroesData, setHeroesData] = useState([]);
   const [getHeroes, setGetHeroes] = useState(true);
+  const [pagePosition, setPagePosition] = useState(basicPagePosition);
   const contextVal = {
     heroesData: {
       heroesData,
       setHeroesData,
     },
     setGetHeroes,
+    pagePosition: {
+      pagePosition,
+      setPagePosition,
+    }
   }
 
   useEffect(() => {
     if(getHeroes) {
-      fetch('/getHeroesData')
+      fetch('http://localhost:3001/getHeroesData')
       .then(res => res.json())
       .then(result => {
         setHeroesData(result);
+        console.log(result);
+        let additionalPage = 0;
+        const rest = result.length % 5;
+        if((result.length > 4) && (rest > 0)) additionalPage = 1;
+        setPagePosition({
+          current: 1,
+          max: Math.trunc(result.length / 5) + additionalPage,
+        })
       })
       .catch(err => setHeroesData([]))
       setGetHeroes(false);
@@ -43,8 +61,8 @@ function App() {
               path='/' 
               element={
                 <>
-                  <PageNav />
-                  <HeroCardBox heroesData={heroesData} />
+                  <PageNav pages={pagePosition} />
+                  <HeroCardBox heroesData={heroesData} pagePosition={pagePosition} />
                 </>
               }
             />

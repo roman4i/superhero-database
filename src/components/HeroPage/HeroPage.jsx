@@ -16,7 +16,7 @@ const HeroPage = () => {
 
   const deleteHero = () => {
     setErrorState('Trying to delete this hero ...');
-    fetch('/deleteHero', {
+    fetch('http://localhost:3001/deleteHero', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
