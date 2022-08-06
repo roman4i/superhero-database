@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import inputSwitch from '../../utils/inputSwitch';
 import './new-hero-page-style.css';
 
 const basicModel = {
@@ -35,37 +36,8 @@ const NewHeroPage = ({ updateHeroes }) => {
 
     const name = event.target.name;
     const value = event.target.value;
-    switch (name) {
-      case 'real_name': {
-        setNewValue('real_name', value)
-        break;
-      }
-
-      case 'nickname': {
-        setNewValue('nickname', value);
-        break;
-      }
-
-      case 'origin_description': {
-        setNewValue('origin_description', value);
-        break;
-      }
-
-      case 'superpowers': {
-        setNewValue('superpowers', value);
-        break;
-      }
-
-      case 'catch_phrase': {
-        setNewValue('catch_phrase', value);
-        break;
-      }
     
-      default: {
-        console.log('Something wrong with newHero state');
-        break;
-      }
-    }
+    inputSwitch(name, value, setNewValue);
   }
 
   const checkSubmit = (event) => {
