@@ -1,8 +1,10 @@
 const db = require('../config/dbConfig');
+const mongo = require('mongodb');
 
 const deleteHeroController = async (req, res) => {
   try {
-    const result = await db.heroesCollection.deleteOne({real_name: req.params.real_name});
+    await db.client.connect();
+    const result = await db.heroesCollection.deleteOne({ _id: new mongo.ObjectID(req.body._id) });
     if(result.deletedCount === 1) {
       res.status(200);
     } else {
@@ -13,7 +15,7 @@ const deleteHeroController = async (req, res) => {
     console.log(error.message);
   } finally {
     res.end();
-    db.client.close()
+    await db.client.close()
   }
 }
 

@@ -6,11 +6,19 @@ import PageNav from '../PageNav/PageNav';
 import HeroCardBox from '../HeroCardBox/HeroCardBox';
 import HeroPage from '../HeroPage/HeroPage';
 import NewHeroPage from '../NewHeroPage/NewHeroPage';
+import Context from '../../storage/context';
 import './app.css';
 
 function App() {
   const [heroesData, setHeroesData] = useState([]);
   const [getHeroes, setGetHeroes] = useState(true);
+  const contextVal = {
+    heroesData: {
+      heroesData,
+      setHeroesData,
+    },
+    setGetHeroes,
+  }
 
   useEffect(() => {
     if(getHeroes) {
@@ -26,25 +34,27 @@ function App() {
 
   return (
     <div className='appBox'>
-      <BrowserRouter>
-        <Title />
-        <Divider />
-        <Routes>
-          <Route 
-            path='/' 
-            element={
-              <>
-                <PageNav />
-                <HeroCardBox heroesData={heroesData} />
-              </>
-            }
-          />
-          <Route path='/new-hero' element={<NewHeroPage updateHeroes={setGetHeroes} />} />
-          <Route path='/show-hero' element={<div>Please, choose right hero</div>} />
-          <Route path='/show-hero/:heroId' element={<HeroPage />} />
-          <Route path='*' element={<div>Not found</div>} />
-        </Routes>
-      </BrowserRouter>
+      <Context.Provider value={ contextVal } >
+        <BrowserRouter>
+          <Title />
+          <Divider />
+          <Routes>
+            <Route 
+              path='/' 
+              element={
+                <>
+                  <PageNav />
+                  <HeroCardBox heroesData={heroesData} />
+                </>
+              }
+            />
+            <Route path='/new-hero' element={<NewHeroPage updateHeroes={setGetHeroes} />} />
+            <Route path='/show-hero' element={<div>Please, choose right hero</div>} />
+            <Route path='/show-hero/:heroId' element={<HeroPage />} />
+            <Route path='*' element={<div>Not found</div>} />
+          </Routes>
+        </BrowserRouter>
+      </Context.Provider>
     </div>
   );
 }

@@ -3,8 +3,7 @@ const base = require('../config/dbConfig');
 const newHeroController = async (req, res) => {
   try {
     base.client.connect();
-    const present = await base.heroesCollection.findOne({real_name: req.body.real_name});
-    console.log(present);
+    const present = await base.heroesCollection.findOne({nickname: req.body.nickname});
     if(present === null || present.count === 0) {
       try {
         await base.heroesCollection.insertOne({...req.body});

@@ -97,7 +97,7 @@ const NewHeroPage = ({ updateHeroes }) => {
           updateHeroes(true);
           navigate('/');
         } else {
-          setErrorText('Failed to send data')
+          setErrorText('Failed to send data or hero is already exist');
         }
       })
       .catch(err => setErrorText(err.message));

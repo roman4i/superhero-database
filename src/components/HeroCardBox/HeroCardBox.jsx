@@ -4,8 +4,8 @@ import PlusHero from '../buttons/PlusHero';
 import './hero-card-box.css'
 
 const HeroCardBox = ({ heroesData }) => {
-	const heroesCards = heroesData.map(val => {
-		return <HeroCard id={val._id} />
+	const heroesCards = heroesData.map((val, index) => {
+		return <HeroCard id={val._id} cardName={val.nickname} key={val + index} />
 	})
 
 	return(
