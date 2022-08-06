@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import './hero-card.css';
 import noImage from '../../images/no-image.png';
 
-const HeroCard = ({ id, cardName }) => {
+const HeroCard = ({ id, cardName, imgs }) => {
   return(
     <Link to={'/show-hero/' + id} >
       <div className='heroCard'>
-        <img className='heroImage' src={ noImage } alt="hero" />
+        <img className='heroImage' src={ imgs.length === 0 ? noImage : imgs[0]} alt="hero" />
         <div>
           { cardName }
         </div>

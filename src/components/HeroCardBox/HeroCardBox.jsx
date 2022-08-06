@@ -12,7 +12,7 @@ const HeroCardBox = ({ heroesData, pagePosition }) => {
 		currentPageCards = heroesData.slice(pagePosition.current * 5 - 5);
 	}
 	const heroesCards = currentPageCards.map((val, index) => {
-		return <HeroCard id={val._id} cardName={val.nickname} key={val + index} />
+		return <HeroCard id={val._id} cardName={val.nickname} imgs={val.images} key={val + index} />
 	})
 
 	return(

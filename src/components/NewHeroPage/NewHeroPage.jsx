@@ -15,6 +15,7 @@ const basicModel = {
 const NewHeroPage = ({ updateHeroes }) => {
   const [newHeroData, setNewHeroData] = useState({...basicModel});
   const [errorText, setErrorText] = useState('');
+  const [imageFiles, setImageFiles] = useState();
   const navigate = useNavigate();
 
   const setNewValue = (valName, val) => {
@@ -73,7 +74,31 @@ const NewHeroPage = ({ updateHeroes }) => {
         }
       })
       .catch(err => setErrorText(err.message));
+      fetch('http://localhost:3001/uploadImage', {
+        method: 'POST',
+        body: imageFiles,
+      })
+      .catch(err => console.log(err.message))
     }
+  }
+
+  const onFilesAdded = (e) => {
+    let links = [];
+
+    const filesList = new FormData();
+
+    for(let i = 0; i < e.target.files.length; i++) {
+      links.push(e.target.files[i].name);
+      filesList.append('file' + i, e.target.files[i], e.target.files[i].name)
+    }
+
+    setNewHeroData(old => {
+      return {
+        ...old,
+        images: links,
+      }
+    });
+    setImageFiles(filesList);
   }
 
   return(
@@ -143,6 +168,7 @@ const NewHeroPage = ({ updateHeroes }) => {
                 name="file_button" 
                 multiple={true}
                 accept='image/*'
+                onChange={onFilesAdded}
               />
             </td>
           </tr>
